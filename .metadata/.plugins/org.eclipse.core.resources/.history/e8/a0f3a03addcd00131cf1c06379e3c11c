@@ -1,0 +1,54 @@
+package org.owls.hello;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Locale;
+
+import javax.speech.Central;
+import javax.speech.EngineException;
+import javax.speech.EngineModeDesc;
+import javax.speech.EngineStateError;
+import javax.speech.recognition.GrammarException;
+import javax.speech.recognition.Recognizer;
+import javax.speech.recognition.ResultAdapter;
+import javax.speech.recognition.RuleGrammar;
+
+
+//javax.speech(JSAPI) 는 CMUSphinx 를 설치해야만 사용할 수 있음.
+// 1. Sphinx 의 bin.tar 를 해제해서 안에 있는 lib 폴더로 이동 
+// 2. jsapi.sh 실행 (권한 변경 필요)
+// 3. 생성된 jsapi.jar 임포트  
+public class SayHello extends ResultAdapter {
+	
+	//대략 Grammer에 따라 Result를 반환하는 역할인듯 
+	private static Recognizer rec;
+	
+	public static void main(String[] args) {
+		
+		try {
+			//Recognizer 인터페이스 초기화 
+			rec = Central.createRecognizer(
+					new EngineModeDesc(Locale.ENGLISH));
+			
+			//Recognizer 인터페이스는 Engine 인터페이스를 상속, 
+			//allocate 함수는 Engine 으로부터 상속받은 메소드 
+			
+			//Engine에 필요한 리소스를 분배함. 성공한다면 Engine 에  ALLOCATED 비트가 새팅됨.
+			//확인은 testEngineState(Engine.ALLOCATED) 로 boolean 체크 
+			rec.allocate();
+			
+			FileReader reader = new FileReader(args[0]);
+			
+			//JSGF - Java Speech Grammar Format
+			// API 에 의하면 RuleGrammer 인터페이스는 반드시 Recognizer 를 통해서 생성/관리되어야 함. 
+			RuleGrammar grammar = rec.loadJSGF(reader);
+			
+		} catch (IllegalArgumentException | EngineException | SecurityException | 
+				GrammarException | EngineStateError | IOException e) {
+			//첫 줄은 Central.createRecognizer 의 Exception
+			//두번째 줄은 RuleGrammer의 Exception 
+			e.printStackTrace();
+		} 
+	}
+};

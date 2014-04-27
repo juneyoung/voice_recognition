@@ -1,0 +1,36 @@
+package org.owls.hello;
+
+import java.util.Locale;
+
+import javax.speech.Central;
+import javax.speech.EngineException;
+import javax.speech.EngineModeDesc;
+import javax.speech.recognition.Recognizer;
+import javax.speech.recognition.ResultAdapter;
+
+
+//javax.speech(JSAPI) 는 CMUSphinx 를 설치해야만 사용할 수 있음.
+// 1. Sphinx 의 bin.tar 를 해제해서 안에 있는 lib 폴더로 이동 
+// 2. jsapi.sh 실행 (권한 변경 필요)
+// 3. 생성된 jsapi.jar 임포트  
+public class SayHello extends ResultAdapter {
+	
+	//대략 Grammer에 따라 Result를 반환하는 역할인듯 
+	private static Recognizer rec;
+	
+	public static void main(String[] args) {
+		
+		try {
+			//Recognizer 인터페이스 초기화 
+			rec = Central.createRecognizer(
+					new EngineModeDesc(Locale.ENGLISH));
+			
+			//Recognizer 인터페이스는 Engine 인터페이스를 상속, 
+			//allocate 함수는 Engine 으로부터 상속받은 메소드 
+			rec.allocate();
+			
+		} catch (IllegalArgumentException | EngineException | SecurityException e) {
+			e.printStackTrace();
+		} 
+	}
+};

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.naming.spi.DirStateFactory.Result"/>
+<fullyQualifiedTypeName name="javax.speech.recognition.ResultAdapter"/>
+<fullyQualifiedTypeName name="javax.speech.recognition.Recognizer"/>
+<fullyQualifiedTypeName name="java.io.FileReader"/>
+<fullyQualifiedTypeName name="javax.speech.recognition.RuleGrammar"/>
+<fullyQualifiedTypeName name="org.owls.hello.SayHello"/>
+<fullyQualifiedTypeName name="javax.speech.recognition.Result"/>
+<fullyQualifiedTypeName name="javax.speech.recognition.ResultToken"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="javax.speech.Central"/>
+<fullyQualifiedTypeName name="javax.speech.EngineModeDesc"/>
+<fullyQualifiedTypeName name="java.util.Locale"/>
+</qualifiedTypeNameHistroy>
